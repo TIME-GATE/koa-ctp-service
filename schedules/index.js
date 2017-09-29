@@ -1,0 +1,1 @@
+//require('./publish_message')

@@ -1,0 +1,3 @@
+*.js linguist-language=js
+*.node linguist-language=js
+*.mk linguist-language=js

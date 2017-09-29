@@ -1,0 +1,7 @@
+node_modules
+logs/*.log
+.tmp
+dump.rdb
+data/*
+npm-debug.log
+*.tar.gz
