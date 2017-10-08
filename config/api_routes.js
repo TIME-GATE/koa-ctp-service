@@ -12,4 +12,5 @@ module.exports.routes = [
   { verb: 'GET',    path: '/v1/testParamsFuncsNocb',  fn: 'embedded.testParamsFunctionNocb',    desc: '传函数参数无回调返回' },
 
   // test ctp
+  { verb: 'POST',   path: '/v1/testCtpTraderLogin',   fn: 'ctp_trader.testCtpTraderLogin',      desc: 'CTP交易登录' },
 ]
