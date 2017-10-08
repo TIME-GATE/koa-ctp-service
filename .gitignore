@@ -5,3 +5,4 @@ dump.rdb
 data/*
 npm-debug.log
 *.tar.gz
+build

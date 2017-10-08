@@ -326,6 +326,11 @@ ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
 endif
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
+                 $(join ^,shifctp.target.mk)))),)
+  include shifctp.target.mk
+endif
+ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
+    $(findstring $(join ^,$(prefix)),\
                  $(join ^,test_function_nocb.target.mk)))),)
   include test_function_nocb.target.mk
 endif
@@ -341,8 +346,8 @@ ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /usr/local/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/dreamboad/Projects/koa-service/build/config.gypi -I/usr/local/lib/node_modules/node-gyp/addon.gypi -I/Users/dreamboad/.node-gyp/8.0.0/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/dreamboad/.node-gyp/8.0.0" "-Dnode_gyp_dir=/usr/local/lib/node_modules/node-gyp" "-Dnode_lib_file=/Users/dreamboad/.node-gyp/8.0.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/Users/dreamboad/Projects/koa-service" "-Dnode_engine=v8" binding.gyp
-Makefile: $(srcdir)/../../.node-gyp/8.0.0/include/node/common.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp $(srcdir)/../../../../usr/local/lib/node_modules/node-gyp/addon.gypi
+cmd_regen_makefile = cd $(srcdir); /usr/local/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/dreamboad/Projects/koa-ctp-service/build/config.gypi -I/usr/local/lib/node_modules/node-gyp/addon.gypi -I/Users/dreamboad/.node-gyp/7.6.0/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/dreamboad/.node-gyp/7.6.0" "-Dnode_gyp_dir=/usr/local/lib/node_modules/node-gyp" "-Dnode_lib_file=/Users/dreamboad/.node-gyp/7.6.0/<(target_arch)/node.lib" "-Dmodule_root_dir=/Users/dreamboad/Projects/koa-ctp-service" "-Dnode_engine=v8" binding.gyp
+Makefile: $(srcdir)/../../.node-gyp/7.6.0/include/node/common.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp $(srcdir)/../../../../usr/local/lib/node_modules/node-gyp/addon.gypi
 	$(call do_cmd,regen_makefile)
 
 # "all" is a concatenation of the "all" targets from all the included
