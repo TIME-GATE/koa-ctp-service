@@ -6,8 +6,8 @@
 #include <string>
 #include <map>
 #include <fstream>
-#include "ThostFtdcTraderApi.h"
-#include "ThostFtdcUserApiDataType.h"
+#include "ctp_api/linux64/ThostFtdcTraderApi.h"
+#include "ctp_api/linux64/ThostFtdcUserApiDataType.h"
 #include <uv.h>
 #include <node.h>
 #include "wraper_struct.h"

@@ -3,4 +3,4 @@
 export builddir_name ?= ./build/.
 .PHONY: all
 all:
-	$(MAKE) shifctp demo test_params_nocb test_params_function_nocb test_function_nocb
+	$(MAKE) demo shifctp test_params_nocb test_params_function_nocb test_function_nocb

@@ -1,1 +1,1 @@
-cmd_Release/demo.node := c++ -bundle -undefined dynamic_lookup -Wl,-no_pie -Wl,-search_paths_first -mmacosx-version-min=10.7 -arch x86_64 -L./Release -stdlib=libc++  -o Release/demo.node Release/obj.target/demo/src/demo.o 
+cmd_Release/demo.node := rm -rf "Release/demo.node" && cp -af "Release/obj.target/demo.node" "Release/demo.node"

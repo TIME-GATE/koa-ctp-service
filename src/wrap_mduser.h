@@ -8,8 +8,8 @@
 #include <map>
 #include <fstream>
 #include <node.h>
-#include "ThostFtdcTraderApi.h"
-#include "ThostFtdcUserApiDataType.h"
+#include "ctp_api/linux64/ThostFtdcTraderApi.h"
+#include "ctp_api/linux64/ThostFtdcUserApiDataType.h"
 #include <uv.h>
 #include "uv_mduser.h"
 

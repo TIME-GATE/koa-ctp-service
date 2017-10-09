@@ -7,7 +7,6 @@ DEFS_Debug := \
 	'-DUSING_UV_SHARED=1' \
 	'-DUSING_V8_SHARED=1' \
 	'-DV8_DEPRECATION_WARNINGS=1' \
-	'-D_DARWIN_USE_64_BIT_INODE=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-DBUILDING_NODE_EXTENSION' \
@@ -16,85 +15,64 @@ DEFS_Debug := \
 
 # Flags passed to all source files.
 CFLAGS_Debug := \
-	-O0 \
-	-gdwarf-2 \
-	-mmacosx-version-min=10.7 \
-	-arch x86_64 \
+	-fPIC \
+	-pthread \
 	-Wall \
-	-Wendif-labels \
-	-W \
-	-Wno-unused-parameter
+	-Wextra \
+	-Wno-unused-parameter \
+	-m64 \
+	-g \
+	-O0
 
 # Flags passed to only C files.
-CFLAGS_C_Debug := \
-	-fno-strict-aliasing
+CFLAGS_C_Debug :=
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Debug := \
-	-std=gnu++0x \
-	-stdlib=libc++ \
 	-fno-rtti \
 	-fno-exceptions \
-	-fno-threadsafe-statics \
-	-fno-strict-aliasing
-
-# Flags passed to only ObjC files.
-CFLAGS_OBJC_Debug :=
-
-# Flags passed to only ObjC++ files.
-CFLAGS_OBJCC_Debug :=
+	-std=gnu++0x
 
 INCS_Debug := \
-	-I/Users/dreamboad/.node-gyp/7.6.0/include/node \
-	-I/Users/dreamboad/.node-gyp/7.6.0/src \
-	-I/Users/dreamboad/.node-gyp/7.6.0/deps/uv/include \
-	-I/Users/dreamboad/.node-gyp/7.6.0/deps/v8/include
+	-I/root/.node-gyp/7.6.0/include/node \
+	-I/root/.node-gyp/7.6.0/src \
+	-I/root/.node-gyp/7.6.0/deps/uv/include \
+	-I/root/.node-gyp/7.6.0/deps/v8/include
 
 DEFS_Release := \
 	'-DNODE_GYP_MODULE_NAME=demo' \
 	'-DUSING_UV_SHARED=1' \
 	'-DUSING_V8_SHARED=1' \
 	'-DV8_DEPRECATION_WARNINGS=1' \
-	'-D_DARWIN_USE_64_BIT_INODE=1' \
 	'-D_LARGEFILE_SOURCE' \
 	'-D_FILE_OFFSET_BITS=64' \
 	'-DBUILDING_NODE_EXTENSION'
 
 # Flags passed to all source files.
 CFLAGS_Release := \
-	-Os \
-	-gdwarf-2 \
-	-mmacosx-version-min=10.7 \
-	-arch x86_64 \
+	-fPIC \
+	-pthread \
 	-Wall \
-	-Wendif-labels \
-	-W \
-	-Wno-unused-parameter
+	-Wextra \
+	-Wno-unused-parameter \
+	-m64 \
+	-O3 \
+	-fno-omit-frame-pointer
 
 # Flags passed to only C files.
-CFLAGS_C_Release := \
-	-fno-strict-aliasing
+CFLAGS_C_Release :=
 
 # Flags passed to only C++ files.
 CFLAGS_CC_Release := \
-	-std=gnu++0x \
-	-stdlib=libc++ \
 	-fno-rtti \
 	-fno-exceptions \
-	-fno-threadsafe-statics \
-	-fno-strict-aliasing
-
-# Flags passed to only ObjC files.
-CFLAGS_OBJC_Release :=
-
-# Flags passed to only ObjC++ files.
-CFLAGS_OBJCC_Release :=
+	-std=gnu++0x
 
 INCS_Release := \
-	-I/Users/dreamboad/.node-gyp/7.6.0/include/node \
-	-I/Users/dreamboad/.node-gyp/7.6.0/src \
-	-I/Users/dreamboad/.node-gyp/7.6.0/deps/uv/include \
-	-I/Users/dreamboad/.node-gyp/7.6.0/deps/v8/include
+	-I/root/.node-gyp/7.6.0/include/node \
+	-I/root/.node-gyp/7.6.0/src \
+	-I/root/.node-gyp/7.6.0/deps/uv/include \
+	-I/root/.node-gyp/7.6.0/deps/v8/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/src/demo.o
@@ -107,8 +85,6 @@ all_deps += $(OBJS)
 $(OBJS): TOOLSET := $(TOOLSET)
 $(OBJS): GYP_CFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_$(BUILDTYPE)) $(CFLAGS_C_$(BUILDTYPE))
 $(OBJS): GYP_CXXFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_$(BUILDTYPE)) $(CFLAGS_CC_$(BUILDTYPE))
-$(OBJS): GYP_OBJCFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_$(BUILDTYPE)) $(CFLAGS_C_$(BUILDTYPE)) $(CFLAGS_OBJC_$(BUILDTYPE))
-$(OBJS): GYP_OBJCXXFLAGS := $(DEFS_$(BUILDTYPE)) $(INCS_$(BUILDTYPE))  $(CFLAGS_$(BUILDTYPE)) $(CFLAGS_CC_$(BUILDTYPE)) $(CFLAGS_OBJCC_$(BUILDTYPE))
 
 # Suffix rules, putting all outputs into $(obj).
 
@@ -126,50 +102,37 @@ $(obj).$(TOOLSET)/$(TARGET)/%.o: $(obj)/%.cc FORCE_DO_CMD
 # End of this set of suffix rules
 ### Rules for final target.
 LDFLAGS_Debug := \
-	-undefined dynamic_lookup \
-	-Wl,-no_pie \
-	-Wl,-search_paths_first \
-	-mmacosx-version-min=10.7 \
-	-arch x86_64 \
-	-L$(builddir) \
-	-stdlib=libc++
-
-LIBTOOLFLAGS_Debug := \
-	-undefined dynamic_lookup \
-	-Wl,-no_pie \
-	-Wl,-search_paths_first
+	-pthread \
+	-rdynamic \
+	-m64
 
 LDFLAGS_Release := \
-	-undefined dynamic_lookup \
-	-Wl,-no_pie \
-	-Wl,-search_paths_first \
-	-mmacosx-version-min=10.7 \
-	-arch x86_64 \
-	-L$(builddir) \
-	-stdlib=libc++
-
-LIBTOOLFLAGS_Release := \
-	-undefined dynamic_lookup \
-	-Wl,-no_pie \
-	-Wl,-search_paths_first
+	-pthread \
+	-rdynamic \
+	-m64
 
 LIBS :=
 
-$(builddir)/demo.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
-$(builddir)/demo.node: LIBS := $(LIBS)
-$(builddir)/demo.node: GYP_LIBTOOLFLAGS := $(LIBTOOLFLAGS_$(BUILDTYPE))
-$(builddir)/demo.node: TOOLSET := $(TOOLSET)
-$(builddir)/demo.node: $(OBJS) FORCE_DO_CMD
+$(obj).target/demo.node: GYP_LDFLAGS := $(LDFLAGS_$(BUILDTYPE))
+$(obj).target/demo.node: LIBS := $(LIBS)
+$(obj).target/demo.node: TOOLSET := $(TOOLSET)
+$(obj).target/demo.node: $(OBJS) FORCE_DO_CMD
 	$(call do_cmd,solink_module)
 
-all_deps += $(builddir)/demo.node
+all_deps += $(obj).target/demo.node
 # Add target alias
 .PHONY: demo
 demo: $(builddir)/demo.node
 
+# Copy this to the executable output path.
+$(builddir)/demo.node: TOOLSET := $(TOOLSET)
+$(builddir)/demo.node: $(obj).target/demo.node FORCE_DO_CMD
+	$(call do_cmd,copy)
+
+all_deps += $(builddir)/demo.node
 # Short alias for building this executable.
 .PHONY: demo.node
-demo.node: $(builddir)/demo.node
+demo.node: $(obj).target/demo.node $(builddir)/demo.node
 
 # Add executable to "all" target.
 .PHONY: all
